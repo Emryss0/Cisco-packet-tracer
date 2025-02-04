@@ -52,19 +52,6 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 }
 ```
 
-Pour attribuer une IP fixe à une machine spécifique :
-
-```bash
-host PC_Fixe {
-    hardware ethernet AA:BB:CC:DD:EE:FF;
-    fixed-address 192.168.1.50;
-}
-```
-
-Sauvegardez (`CTRL+X`, `Y`, `Entrée`).
-
----
-
 ## 3️⃣ Démarrer et Activer le Service DHCP
 
 ```bash
