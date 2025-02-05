@@ -21,10 +21,10 @@ sudo apt install isc-dhcp-server -y
 sudo nano /etc/default/isc-dhcp-server
 ```
 
-Modifiez la ligne suivante en spécifiant votre interface réseau (ex: `eth0`):
+Modifiez la ligne suivante en spécifiant votre interface réseau (ex: `ens33`):
 
 ```
-INTERFACESv4="eth0"
+INTERFACESv4="ens33"
 ```
 
 Sauvegardez (`CTRL+X`, `Y`, `Entrée`).
@@ -42,13 +42,14 @@ sudo nano /etc/dhcp/dhcpd.conf
 Ajoutez ou modifiez ces lignes selon votre réseau :
 
 ```bash
-subnet 192.168.1.0 netmask 255.255.255.0 {
-    range 192.168.1.100 192.168.1.200;
-    option routers 192.168.1.1;
-    option domain-name-servers 8.8.8.8, 8.8.4.4;
-    option broadcast-address 192.168.1.255;
-    default-lease-time 600;
-    max-lease-time 7200;
+subnet 192.168.50.0 netmask 255.255.255.0 {
+range 192.168.50.3 192.168.50.100;
+option routers 192.168.50.2;
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+option broadcast-address 192.168.1.255;
+default-lease-time 600;
+max-lease-time 7200;
+
 }
 ```
 
@@ -80,8 +81,8 @@ sudo nano /etc/network/interfaces
 Ajoutez/modifiez :
 
 ```
-auto eth0
-iface eth0 inet dhcp
+auto ens33
+iface ens33 inet dhcp
 ```
 
 Sauvegardez (`CTRL+X`, `Y`, `Entrée`).
@@ -95,7 +96,7 @@ sudo systemctl restart networking
 Ou utilisez directement **dhclient** pour récupérer une IP :
 
 ```bash
-sudo dhclient -v eth0
+sudo dhclient -v ens33
 ```
 
 Vérifiez l'adresse IP obtenue :
